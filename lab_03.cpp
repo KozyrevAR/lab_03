@@ -6,6 +6,7 @@
 #include <conio.h>
 #include <vector>
 #include <string>
+#include "histogram.h"
 using namespace std;
 vector<double>
 input_numbers(size_t count) 
@@ -16,24 +17,7 @@ input_numbers(size_t count)
     }
     return result;
 }
-void find_minmax(const vector<double>& numbers, double& min, double& max)
-{
-    min = numbers[0];
-    max = numbers[0];
-    for (double number : numbers)
-    {
-        if (min > number)
-        {
-            min = number;
-        }
-        else if (max < number)
-        {
-            max = number;
-        }
 
-    }
-    return;
-}
 void make_histogram(size_t& bin_count, size_t& number_count, const vector<double>& numbers, vector <size_t>& bins, double& min, double& max)
 {
     double bin_size = (max - min) / bin_count;
@@ -64,7 +48,9 @@ void show_histogram_text(vector<size_t>&bins, size_t& bin_count, size_t& number_
     for (size_t bin : bins)
         if (bin > max_bin)
             max_bin = bin;
-
+    // средняя высота столбца (к заданию вар. 7)
+    size_t sr_bin = 0;
+    sr_bin = number_count / bin_count;
     // вывод
     const size_t SCREEN_WIDTH = 80;
     const size_t MAX_ASTERISK = SCREEN_WIDTH - 3 - 1;
@@ -80,10 +66,23 @@ void show_histogram_text(vector<size_t>&bins, size_t& bin_count, size_t& number_
         if (bin < 10)
             cout << " ";
         cout << bin << "|";
-        
-        for (size_t i = 0; i < bin; i++)
+        // если высота меньше средней или равна (к заданию вар. 7)
+        if (bin <= sr_bin)
         {
-            cout << '*';
+            for (size_t i = 0; i < height; i++)
+                cout << "*";
+            int kmin = round(sr_bin - bin);
+            for (size_t i = 0; i < kmin; i++)
+                cout << "-";
+        }
+        // если высота выше средней (к заданию вар. 7)
+        else if (bin > sr_bin)
+        {
+            for (size_t i = 0; i < sr_bin; i++)
+                cout << "*";
+            int kmax = round(bin - sr_bin);
+            for (size_t i = 0; i < kmax; i++)
+                cout << "+";
         }
         cout << endl;
     }   
