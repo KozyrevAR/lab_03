@@ -42,6 +42,21 @@ void test_empty()
     assert(min == 0);
     assert(max == 0);
 }
+// тесты из д.з.
+void check_color1()
+{
+    vector <size_t> a = { 3, 2, 5 };
+    string color = " ";
+    svg_color(a, 10, 3, color);
+    assert(color == "red");
+}
+void check_color2()
+{
+    vector <size_t> a = { 1, 3, 2, 1, 2, 1 };
+    string color = " ";
+    svg_color(a, 10, 3, color);
+    assert(color == "green");
+}
 int main() 
 {
     test_positive();
@@ -49,4 +64,6 @@ int main()
     test_ravnie();
     test_only1();
     test_empty();
+    check_color1();
+    check_color2();
 }
