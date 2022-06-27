@@ -102,9 +102,11 @@ int main()
     vector <size_t> bins(bin_count, 0);
     double min;
     double max;
+    string color = " ";
     find_minmax(numbers, min, max);
     make_histogram(bin_count, number_count, numbers, bins, min, max);
-    show_histogram_svg(bins);
+    svg_color(bins, number_count, bin_count, color);
+    show_histogram_svg(bins, color);
    
     return 0;
 }
