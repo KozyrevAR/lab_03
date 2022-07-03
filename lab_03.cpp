@@ -87,12 +87,7 @@ void show_histogram_text(vector<size_t>&bins, size_t& bin_count, size_t& number_
         cout << endl;
     }   
 }
-vector<double>
-input_numbers(istream& in, size_t count) 
-{
 
-    
-}
 int main()
 {
     // ввод
@@ -109,7 +104,6 @@ int main()
     double min;
     double max;
     string color = " ";
-    input_numbers(cin, number_count);
     find_minmax(numbers, min, max);
     make_histogram(bin_count, number_count, numbers, bins, min, max);
     svg_color(bins, number_count, bin_count, color);
